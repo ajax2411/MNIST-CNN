@@ -5,24 +5,34 @@ from torch.nn.functional import relu
 
 class CNN(nn.Module):
 
-    def __init__(self, in_channels, classes, kernel_size, stride, padding=0):
+    def __init__(self, in_channels, num_classes, conv_kernel_size, pool_kernel_size, conv_stride, pool_stride, num_hidden_layers):
 
         super(CNN, self).__init__()
 
-        self.conv1 = nn.Conv2d(in_channels, 10, kernel_size=kernel_size, stride=stride, padding=padding)
-        self.conv2 = nn.Conv2d(10, 24, kernel_size=kernel_size, stride=stride)
+        self.conv1 = nn.Conv2d(in_channels, 10, kernel_size=conv_kernel_size, stride=conv_stride)
+        self.conv2 = nn.Conv2d(10, 24, kernel_size=conv_kernel_size, stride=conv_stride)
 
-        self.pool = nn.MaxPool2d(kernel_size, stride=stride)
+        self.pool = nn.MaxPool2d(pool_kernel_size, stride=pool_stride)
 
-        self.fc1 = nn.Linear(24 * kernel_size * kernel_size, 28)
-        self.fc2 = nn.Linear(28, classes)
+        self.fc1 = nn.Linear(24 * 4 * 4, num_hidden_layers)
+        self.fc2 = nn.Linear(num_hidden_layers, num_classes)
 
     def forward(self, x):
 
-        x = self.pool(relu(self.conv1(x)))
-        x = self.pool(relu(self.conv2(x)))
+        x = self.conv1(x)
+        x = relu(x)
+        x = self.pool(x)
 
-        x = relu(self.fc1(x))
+        x = self.conv2(x)
+        x = relu(x)
+        x = self.pool(x)
+
+        x = x.view(-1, 384)
+
+        x = self.fc1(x)
+        x = relu(x)
+
         x = self.fc2(x)
+        x = relu(x)
 
         return x
