@@ -33,6 +33,5 @@ class CNN(nn.Module):
         x = relu(x)
 
         x = self.fc2(x)
-        x = relu(x)
 
         return x
