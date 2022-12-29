@@ -1,2 +1,2 @@
 # MNIST-CNN
-CNN to recognize digits from the MNIST Dataset.
+Convolutional Neural Network written using the PyTorch API designed to recognize data from the MNIST dataset.
