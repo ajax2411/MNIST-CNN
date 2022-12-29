@@ -5,7 +5,7 @@ from torch.nn.functional import relu
 
 class CNN(nn.Module):
 
-    def __init__(self, in_channels, num_classes, conv_kernel_size, pool_kernel_size, conv_stride, pool_stride, num_hidden_layers):
+    def __init__(self, in_channels, num_classes, conv_kernel_size, pool_kernel_size, conv_stride, pool_stride, fc1_output):
 
         super(CNN, self).__init__()
 
@@ -14,8 +14,8 @@ class CNN(nn.Module):
 
         self.pool = nn.MaxPool2d(pool_kernel_size, stride=pool_stride)
 
-        self.fc1 = nn.Linear(24 * 4 * 4, num_hidden_layers)
-        self.fc2 = nn.Linear(num_hidden_layers, num_classes)
+        self.fc1 = nn.Linear(24 * 4 * 4, fc1_output)
+        self.fc2 = nn.Linear(fc1_output, num_classes)
 
     def forward(self, x):
 
@@ -27,7 +27,7 @@ class CNN(nn.Module):
         x = relu(x)
         x = self.pool(x)
 
-        x = x.view(-1, 384)
+        x = x.view(-1, 24 * 4 * 4)
 
         x = self.fc1(x)
         x = relu(x)
