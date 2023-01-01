@@ -1,6 +1,6 @@
 
 import torch.nn as nn
-from torch.nn.functional import relu
+from torch.nn.functional import relu, log_softmax
 
 
 class CNN(nn.Module):
@@ -15,7 +15,9 @@ class CNN(nn.Module):
         self.pool = nn.MaxPool2d(pool_kernel_size, stride=pool_stride)
 
         self.fc1 = nn.Linear(24 * 4 * 4, fc1_output)
-        self.fc2 = nn.Linear(fc1_output, num_classes)
+        self.fc2 = nn.Linear(fc1_output, fc1_output * 2)
+        self.fc3 = nn.Linear(fc1_output * 2, fc1_output * 4)
+        self.fc4 = nn.Linear(fc1_output * 4, num_classes)
 
     def forward(self, x):
 
@@ -33,5 +35,11 @@ class CNN(nn.Module):
         x = relu(x)
 
         x = self.fc2(x)
+        x = relu(x)
+
+        x = self.fc3(x)
+        x = relu(x)
+
+        x = self.fc4(x)
 
         return x
