@@ -12,10 +12,10 @@ This layer takes in an MNIST image in the form of a tensor of size (batch_size, 
 ### Fully Connected Layers
 4 fully connected layers are used.
 
-Layer 1 size: 384
-Layer 2 Size: 1124
-Layer 3 Size: 2248
-Layer 4 Size: 10
+Layer 1 size: 384  
+Layer 2 Size: 1124  
+Layer 3 Size: 2248  
+Layer 4 Size: 10  
 
 Layers 1 through 3 use ReLU as an activation function.
 Using LogSoftmax for the output layer is an option. To do this, simply change the forward() function's return value from `return x` to `return LogSoftmax(x)`.
