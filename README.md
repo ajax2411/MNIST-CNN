@@ -20,5 +20,13 @@ Layer 4 Size: 10
 Layers 1 through 3 use ReLU as an activation function.
 Using LogSoftmax for the output layer is an option. To do this, simply change the forward() function's return value from `return x` to `return LogSoftmax(x)`.
 
-## Loss Function and Optimizer
+## Training
+
+### Loss Function and Optimizer
 This model uses Cross Entropy Loss as a loss function and Stochastic Gradient Descent as an optimizer.
+
+### Training Parameters
+  train_batch_size = 32
+  learning_rate = 0.01
+  momentum = 0.8
+  num_epochs = 200
