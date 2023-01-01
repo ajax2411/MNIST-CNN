@@ -26,7 +26,9 @@ Using LogSoftmax for the output layer is an option. To do this, simply change th
 This model uses Cross Entropy Loss as a loss function and Stochastic Gradient Descent as an optimizer.
 
 ### Training Parameters
-  train_batch_size = 32
-  learning_rate = 0.01
-  momentum = 0.8
-  num_epochs = 200
+```python
+train_batch_size = 32
+learning_rate = 0.01
+momentum = 0.8
+num_epochs = 200
+```
