@@ -32,3 +32,7 @@ learning_rate = 0.01
 momentum = 0.8
 num_epochs = 200
 ```
+
+## Test Results
+Accuracy: 99.34%  
+Loss: 0.0456
